@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+
+{{ partial "head.html" . }} <!-- for the header -->
+
+<body>
+<div class="wrapper">
+  <!-- deleted the top of the websites stuff as it wasn't working and looked weird -->
+
+<header>
+  <div class="container">
+    <h2 class="lone-header">LOLCODE Documentation</h2>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+
+    {{ partial "nav.html" . }} <!-- for the navigation bar -->
+
+    <!-- this makes the navigation bar links work -->
+    <div class="docs-content">
+      {{ range $name, $taxonomy := .Site.Taxonomies.categories }}
+        <h2>{{ $name | title}}</h2>
+    {{ range $taxonomy.Pages }}
+        <h3 id="{{ .LinkTitle | urlize }}">{{ .Title }} </h3>
+        {{ .Content }}
+        <hr>
+      {{ end }}
+    {{ end }}
+    </div>
+  </div>
+
+
+{{ partial "footer.html" . }} <!-- for the footer -->
+
+</div>
+<script src="{{ .Site.BaseURL }}assets/js/jquery.min.js"></script> <!-- adding the .Site.BaseURL -->
+<script type="text/javascript" src="js/prettify/prettify.js"></script> 
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?lang=css&skin=sunburst"></script>
+<script src="{{ .Site.BaseURL }}assets/js/layout.js"></script> <!-- adding the .Site.BaseURL -->
+</body>
+</html>
